@@ -12,7 +12,7 @@
             </div>
             <!--end::Page title-->
             <!--begin::Button-->
-            <a href="/add_rfid" class="btn btn-primary fw-bold" id="kt_toolbar_primary_button">Tambah Data</a>
+            <a href="/erwin/public/add_rfid" class="btn btn-primary fw-bold" id="kt_toolbar_primary_button">Daftarkan Kartu</a>
             <!--end::Button-->
         </div>
         <!--end::Container-->
@@ -20,6 +20,35 @@
 
     <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
         <div class="content flex-row-fluid" id="kt_content">
+            @if (Session::has('status'))
+                <div class="alert alert-dismissible bg-primary d-flex flex-column flex-sm-row p-5 mb-10">
+                    <!--begin::Icon-->
+                    <i class="ki-duotone ki-shield-tick fs-2hx text-success me-4"><span class="path1"></span><span
+                            class="path2"></span></i>
+                    <!--end::Icon-->
+
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-column text-light pe-0 pe-sm-10">
+                        <!--begin::Title-->
+                        <h4 class="mb-2 light">Sukses</h4>
+                        <!--end::Title-->
+                        <!--begin::Content-->
+                        <span> {{ Session::get('message') }}</span>
+                        <!--end::Content-->
+                    </div>
+                    <!--end::Wrapper-->
+
+                    <!--begin::Close-->
+                    <button type="button"
+                        class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto"
+                        data-bs-dismiss="alert">
+                        <i class="ki-duotone ki-cross fs-1 text-light"><span class="path1"></span><span
+                                class="path2"></span></i>
+                    </button>
+                    <!--end::Close-->
+                </div>
+            @endif
+
             <div class="card">
                 <!--begin::Card body-->
                 <div class="card-body py-4">
@@ -32,25 +61,29 @@
                                     <th>Nomor Kartu</th>
                                     <th>Ruangan</th>
                                     <th>Pemilik Ruangan</th>
+                                    <th>Kode Ruangan</th>
                                     <th>Status</th>
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>324324234324</td>
-                                    <td>Ruangan 1</td>
-                                    <td>Wendyato</td>
-                                    <td>Aktif</td>
-                                    <td></td>
-                                </tr>
-                                {{-- <tr>
-                                    <td>2</td>
-                                    <td>34324234234</td>
-                                    <td>Ruangan 2</td>
-                                    <td>Erick</td>
-                                </tr> --}}
+                                @foreach ($rfidList as $row)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $row->nomor_kartu }}</td>
+                                        <td>{{ $row->ruangan->nama }}</td>
+                                        <td>{{ $row->pengguna->nama }}</td>
+                                        <td>{{ $row->apiKey }}</td>
+                                        <td>{{ $row->status }}</td>
+                                        <td> <a href="/erwin/public/rfid/rfid-delete/{{ $row->id }}"
+                                                class="btn btn-sm btn-icon btn-danger"><i
+                                                    class="las la-trash fs-2 text-dark"></i></a>
+                                            <a href="/ruangan/ruangan-edit/{{ $row->id }}"
+                                                class="btn btn-sm btn-icon btn-success"><i
+                                                    class="las la-edit fs-2 "></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

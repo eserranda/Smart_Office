@@ -31,7 +31,7 @@
                             <div class="tab-pane fade active show" id="kt_stats_widget_6_tab_1">
                                 <!--begin::Table container-->
                                 <div class="col-xl-12 mb-1">
-                                    <form action="/ruangan/ruangan_save" id="kt_modal_new_card_form m-5" class="form">
+                                    <form action="/erwin/public/ruangan/ruangan_save" class="form">
                                         @csrf
                                         <!--begin::Input group-->
                                         <div class="d-flex flex-column mb-5 fv-row">
@@ -45,27 +45,12 @@
                                         <div class="d-flex flex-column mb-5 fv-row">
                                             <!--begin::Label-->
                                             <label class="d-flex align-items-center fs-6 fw-semibold form-label mb-2">
-                                                <span class="required">Kode RFID</span>
+                                                <span class="required">Api Key Modul</span>
                                             </label>
                                             <input type="text" class="form-control form-control-solid"
-                                                placeholder="Kode RFID" name="kode_rfid" />
+                                                placeholder="Masukkan Api Key" name="apikey" />
                                         </div>
 
-                                        <div class="d-flex flex-column mb-5 fv-row">
-                                            <div class="col-md-12 fv-row">
-                                                <label class="required fs-6 fw-semibold form-label mb-2">
-                                                    Pemilik Ruangan</label>
-                                                <select name="id_pengguna" class="form-select form-select-solid"
-                                                    data-control="select2" data-hide-search="true"
-                                                    data-placeholder="Pilih Pemilik Ruangan">
-                                                    <option></option>
-                                                    @foreach ($PenggunaList as $row)
-                                                        <option value="{{ $row->id }}">{{ $row->nama }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                        </div>
 
                                         <!--end::Input group-->
                                         <div class="text-center pt-15">

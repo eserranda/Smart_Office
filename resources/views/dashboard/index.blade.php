@@ -29,7 +29,7 @@
                             <!--end::Content-->
 
                             <!--begin::Item-->
-                            @foreach ($dataRuangan as $row)
+                            @foreach ($statusDevice as $row)
                                 <div class="d-flex flex-stack">
                                     <!--begin::Wrapper-->
                                     <div class="d-flex align-items-center me-3">
@@ -39,9 +39,9 @@
                                         <!--begin::Section-->
                                         <div class="flex-grow-1">
                                             <a href="../../demo11/dist/apps/ecommerce/sales/details.html"
-                                                class="text-gray-800 text-hover-primary fs-5 fw-bold lh-0">{{ $row->nama }}</a>
-                                            <span
-                                                class="text-gray-400 fw-semibold d-block fs-7">{{ $row->pengguna->nama }}</span>
+                                                class="text-gray-800 text-hover-primary fs-5 fw-bold lh-0">{{ $row->ruangan->nama }}</a>
+                                            {{-- <span
+                                                class="text-gray-400 fw-semibold d-block fs-7">{{ $row->pengguna->nama }}</span> --}}
                                         </div>
                                         <!--end::Section-->
                                     </div>
@@ -79,55 +79,60 @@
                         <!--end::Header-->
                         <!--begin::Body-->
                         <div class="card-body">
-
                             <!--begin::Tab Content-->
                             <div class="tab-content">
                                 <!--begin::Tap pane-->
                                 <div class="tab-pane fade active show" id="kt_stats_widget_6_tab_1">
                                     <!--begin::Table container-->
-                                    <div class="table-responsive">
-                                        <!--begin::Table-->
-
+                                    <div id="statusTable">
                                         <div class="table-responsive">
-                                            <table class="table table-row-dashed table-row-gray-300 gy-7">
-                                                <thead>
-                                                    <tr class="fw-bold fs-6 text-gray-800">
-                                                        <th>Ruangan</th>
-                                                        <th>Status Dosen</th>
-                                                        <th>Pintu</th>
-                                                        <th>Lampu</th>
-                                                        <th>AC</th>
-                                                        <th>Sensor Gerak</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Ruangan 2</td>
-                                                        <td>Sibuk</td>
-                                                        <td>Terkunci</td>
-                                                        <td>Menyala</td>
-                                                        <td>Menyala</td>
-                                                        <td>Aktif</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Ruangan 3</td>
-                                                        <td>Sibuk</td>
-                                                        <td>Terkunci</td>
-                                                        <td>Menyala</td>
-                                                        <td>Menyala</td>
-                                                        <td>Aktif</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Ruangan 4</td>
-                                                        <td>Sibuk</td>
-                                                        <td>Terkunci</td>
-                                                        <td>Menyala</td>
-                                                        <td>Menyala</td>
-                                                        <td>Aktif</td>
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
+                                            <!--begin::Table-->
+                                            <div class="table-responsive">
+                                                <table class="table table-row-dashed table-row-gray-300 gy-7">
+                                                    <thead>
+                                                        <tr class="fw-bold fs-6 text-gray-800">
+                                                            <th>Ruangan</th>
+                                                            {{-- <th>Status Dosen</th> --}}
+                                                            <th>Pintu</th>
+                                                            <th>Lampu</th>
+                                                            <th>AC</th>
+                                                            <th>Terminal</th>
+                                                            <th>Sensor Gerak</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {{-- @foreach ($statusDevice as $row)
+                                                            <tr>
+                                                                <td>{{ $row->ruangan->nama }}</td>
+                                                                <td>
+                                                                    {!! $row->status_pintu == 1
+                                                                        ? '<span class="badge badge-primary">Terbuka</span>'
+                                                                        : '<span class="badge badge-danger">Tertutup</span>' !!}
+                                                                </td>
+                                                                <td>
+                                                                    {!! $row->status_lampu == 1
+                                                                        ? '<span class="badge badge-primary">On</span>'
+                                                                        : '<span class="badge badge-danger">Off</span>' !!}
+                                                                </td>
+                                                                <td>
+                                                                    {!! $row->status_ac == 1
+                                                                        ? '<span class="badge badge-primary">On</span>'
+                                                                        : '<span class="badge badge-danger">Off</span>' !!}
+                                                                </td>
+                                                                <td>
+                                                                    {!! $row->status_terminal == 1
+                                                                        ? '<span class="badge badge-primary">On</span>'
+                                                                        : '<span class="badge badge-danger">Off</span>' !!}
+                                                                </td>
+                                                                <td>
+                                                                    {!! $row->sensor_gerak == 1
+                                                                        ? '<span class="badge badge-primary">On</span>'
+                                                                        : '<span class="badge badge-danger">Off</span>' !!}
+                                                                </td>
+                                                        @endforeach --}}
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                     <!--end::Table-->
@@ -146,4 +151,40 @@
         </div>
         <!--end::Post-->
     </div>
+
+    <script>
+        function updateStatusTable() {
+            // Kirim permintaan AJAX ke server untuk mengambil data status perangkat
+            fetch('/erwin/public/get_status_device')
+                .then(response => response.json())
+                .then(data => {
+                    // Perbarui isi tabel dengan data yang diterima dari server
+                    const tableBody = document.querySelector('#statusTable table tbody');
+                    tableBody.innerHTML = ''; // Hapus isi tabel sebelum mengisi data baru
+
+                    data.forEach(row => {
+                        const newRow = `
+                            <tr>
+                                <td>${row.ruangan.nama}</td>
+                                <td>${row.status_pintu == 1 ? '<span class="badge badge-primary">Terbuka</span>' : '<span class="badge badge-danger">Tertutup</span>'}</td>
+                                <td>${row.status_lampu == 1 ? '<span class="badge badge-primary">On</span>' : '<span class="badge badge-danger">Off</span>'}</td>
+                                <td>${row.status_ac == 1 ? '<span class="badge badge-primary">On</span>' : '<span class="badge badge-danger">Off</span>'}</td>
+                                <td>${row.status_terminal == 1 ? '<span class="badge badge-primary">On</span>' : '<span class="badge badge-danger">Off</span>'}</td>
+                                <td>${row.sensor_gerak == 1 ? '<span class="badge badge-warning">Gerakan Terdeteksi</span>' : '<span class="badge badge-primary">Aman</span>'}</td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += newRow;
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+        // Panggil fungsi untuk pertama kali
+        updateStatusTable();
+
+        // Panggil fungsi setiap 5 detik untuk memperbarui tabel secara otomatis
+        setInterval(updateStatusTable, 2000);
+    </script>
 @endsection

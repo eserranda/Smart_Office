@@ -12,7 +12,8 @@
             </div>
             <!--end::Page title-->
             <!--begin::Button-->
-            <a href="/ruangan/add_ruangan" class="btn btn-primary fw-bold" id="kt_toolbar_primary_button">Tambah Data</a>
+            <a href="/erwin/public/ruangan/add_ruangan" class="btn btn-primary fw-bold" id="kt_toolbar_primary_button">Tambah
+                Data</a>
             <!--end::Button-->
         </div>
         <!--end::Container-->
@@ -60,7 +61,7 @@
                                 <tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
                                     <th>No</th>
                                     <th>Ruangan</th>
-                                    <th>Kode RFID</th>
+                                    <th>Api Key</th>
                                     <th>Status</th>
                                     <th>Opsi</th>
                                 </tr>
@@ -70,16 +71,17 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $row->nama }}</td>
-                                        <td>{{ $row->kode_rfid }}</td>
+                                        <td>{{ $row->apiKey }}</td>
                                         <td>{{ $row->status }}</td>
                                         <td>
-                                            <a href="/ruangan/ruangan-delete/{{ $row->id }}"
+                                            <a href="/erwin/public/ruangan/ruangan-delete/{{ $row->id }}"
                                                 class="btn btn-sm btn-icon btn-danger"><i
                                                     class="las la-trash fs-2 text-dark"></i></a>
                                             <a href="/ruangan/ruangan-edit/{{ $row->id }}"
                                                 class="btn btn-sm btn-icon btn-success"><i
                                                     class="las la-edit fs-2 "></i></a>
                                         </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>

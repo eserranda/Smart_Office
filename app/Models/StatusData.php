@@ -5,18 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rfid extends Model
+class StatusData extends Model
 {
     use HasFactory;
-    protected $fillable = ['nomor_kartu', 'id_ruangan', 'id_pengguna', 'status', 'apiKey'];
+    // protected $table = 'status_data';
+    protected $fillable = ['id_ruangan', 'apiKey', 'status_dosen', 'status_pintu', 'status_lampu', 'status_ac', 'status_terminal', 'sensor_gerak'];
+    public $timestamps = false;
 
     public function ruangan()
     {
         return $this->belongsTo(Ruangan::class, 'id_ruangan', 'id');
-    }
-
-    public function pengguna()
-    {
-        return $this->belongsTo(Pengguna::class, 'id_pengguna', 'id');
     }
 }

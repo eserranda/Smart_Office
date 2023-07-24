@@ -42,9 +42,20 @@ class RuanganController extends Controller
         return redirect('ruangan/data_ruangan');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    public function get_kode_ruangan(Request $request)
+    {
+        $id_ruangan = $request->input('id_ruangan');
+
+        $data = Ruangan::where('id', $id_ruangan)
+            ->first();
+
+        if ($data) {
+            return response()->json(['data' => $data]);
+        } else {
+            return response()->json(['data' => 'error', 'message' => 'No data result']);
+        }
+    }
+
     public function show(Ruangan $ruangan)
     {
         //
@@ -69,8 +80,14 @@ class RuanganController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ruangan $ruangan)
+    public function destroy(Ruangan $ruangan, $id)
     {
-        //
+        $delete_user = Ruangan::findOrFail($id);
+        $delete_user->delete();
+        if ($delete_user) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'Data berhasil Dihapus!');
+        }
+        return redirect('/ruangan/data_ruangan');
     }
 }

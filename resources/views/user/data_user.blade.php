@@ -12,7 +12,8 @@
             </div>
             <!--end::Page title-->
             <!--begin::Button-->
-            <a href="/user/add_user" class="btn btn-primary fw-bold" id="kt_toolbar_primary_button">Tambah Data</a>
+            <a href="/erwin/public/user/add_user" class="btn btn-primary fw-bold" id="kt_toolbar_primary_button">Tambah
+                Data</a>
             <!--end::Button-->
         </div>
         <!--end::Container-->

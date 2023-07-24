@@ -5,10 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Data extends Model
+class DataTemp extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['data', 'uid'];
-    public $timestamps = false;
+    protected $fillable = ['id_card', 'apiKey'];
 }

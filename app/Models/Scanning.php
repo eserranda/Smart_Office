@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Data extends Model
+class Scanning extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['data', 'uid'];
+    protected $table = 'scanning';
+    protected $fillable = ['mode_daftar'];
     public $timestamps = false;
 }

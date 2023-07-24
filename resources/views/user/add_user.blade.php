@@ -31,7 +31,8 @@
                             <div class="tab-pane fade active show" id="kt_stats_widget_6_tab_1">
                                 <!--begin::Table container-->
                                 <div class="col-xl-12 mb-1">
-                                    <form id="kt_modal_new_card_form m-5" class="form" action="user_save">
+                                    <form id="kt_modal_new_card_form m-5" class="form"
+                                        action="/erwin/public/user/user_save">
                                         @csrf
                                         <!--begin::Input group-->
                                         <div class="d-flex flex-column mb-5 fv-row">

@@ -14,5 +14,13 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         '/csrf_token',
         '/data_endpoint',
+        '/scan_kartu',
+        '/data_temp',
+        '/scanning',
+        '/data_scanning',
+        '/get_kode_ruangan',
+        '/status_device',
+        '/status_pintu',
+        '/status_sensorPir',
     ];
 }
