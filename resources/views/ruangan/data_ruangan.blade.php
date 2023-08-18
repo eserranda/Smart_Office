@@ -12,7 +12,7 @@
             </div>
             <!--end::Page title-->
             <!--begin::Button-->
-            <a href="/erwin/public/ruangan/add_ruangan" class="btn btn-primary fw-bold" id="kt_toolbar_primary_button">Tambah
+            <a href="/ruangan/add_ruangan" class="btn btn-primary fw-bold" id="kt_toolbar_primary_button">Tambah
                 Data</a>
             <!--end::Button-->
         </div>

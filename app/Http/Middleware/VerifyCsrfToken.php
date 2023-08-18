@@ -22,5 +22,6 @@ class VerifyCsrfToken extends Middleware
         '/status_device',
         '/status_pintu',
         '/status_sensorPir',
+        '/status_off',
     ];
 }

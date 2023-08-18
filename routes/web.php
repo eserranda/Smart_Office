@@ -6,6 +6,7 @@ use App\Http\Controllers\RfidController;
 use App\Http\Controllers\RuanganController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DataEspController;
 use App\Http\Controllers\DataTempController;
 use App\Http\Controllers\ScanningController;
 use App\Http\Controllers\StatusDataController;
@@ -52,6 +53,8 @@ Route::get('/add_user', function () {
     return view('user.add_user');
 });
 
+
+
 Route::controller(StatusDataController::class)->group(function () {
     Route::post('/status_device', 'status_device');
 });
@@ -64,6 +67,7 @@ Route::controller(DataTempController::class)->group(function () {
 Route::controller(ScanningController::class)->group(function () {
     Route::get('/ambil_data', 'ambil_data');
     Route::post('/data_scanning', 'data_scanning');
+    Route::post('/status_off', 'ubahStatusoff');
 });
 
 Route::controller(RfidController::class)->group(function () {

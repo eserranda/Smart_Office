@@ -12,7 +12,8 @@
             </div>
             <!--end::Heaeder menu toggle-->
             <a href="/">
-                <img alt="Logo" src="{{ asset('assets') }}/media/logos/demo11.svg"
+                {{-- <img alt="Logo" src="{{ asset('assets') }}/media/logos/demo11.svg" --}}
+                <img alt="Logo" src="{{ asset('assets') }}/media/logos/erwinlogo.png"
                     class="theme-light-show h-20px h-lg-30px" />
                 <img alt="Logo" src="{{ asset('assets') }}/media/logos/demo11-dark.svg"
                     class="theme-dark-show h-20px h-lg-30px" />

@@ -12,7 +12,8 @@
         <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
             class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
             <!--begin:Menu link-->
-            <a href="/erwin/public/dashboards">
+            {{--  --}}
+            <a href="/dashboards">
                 <span class="menu-link py-3">
                     <span class="menu-title">Dashboards</span>
                 </span>
@@ -29,7 +30,7 @@
         <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
             class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
             <!--begin:Menu link-->
-            <a href="/erwin/public/rfid">
+            <a href="/rfid">
                 <span class="menu-link py-3">
                     <span class="menu-title">RFID</span>
                 </span>
@@ -42,7 +43,7 @@
         <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
             class="menu-item menu-lg-down-accordion me-0 me-lg-2">
             <!--begin:Menu link-->
-            <a href="/erwin/public/user/data_user">
+            <a href="/user/data_user">
                 <span class="menu-link py-3">
                     <span class="menu-title">Users</span>
                 </span>
@@ -59,7 +60,7 @@
         <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start"
             class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
             <!--begin:Menu link-->
-            <a href="/erwin/public/ruangan/data_ruangan">
+            <a href="/ruangan/data_ruangan">
                 <span class="menu-link py-3">
                     <span class="menu-title">Ruangan</span>
                 </span>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Telegram\Bot\Api;
 use App\Models\Ruangan;
 use App\Models\Dashboard;
 use App\Models\StatusData;
@@ -11,9 +12,8 @@ use App\Http\Requests\UpdateDashboardRequest;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+
     public function index()
     {
         $status_device = StatusData::all();
@@ -32,22 +32,16 @@ class DashboardController extends Controller
         $apiKey = $request->input('apiKey');
         $status_pintu = $request->input('status_pintu');
 
-        // Ambil data ruangan berdasarkan apiKey
         $ruangan = Ruangan::where('apiKey', $apiKey)->first();
 
         if ($ruangan) {
-            // Ambil data status_data berdasarkan id_ruangan yang sesuai
             $statusData = StatusData::where('id_ruangan', $ruangan->id)->first();
-
             if ($statusData) {
-                // Jika data status_data sudah ada, update status_pintu
                 $statusData->update(['status_pintu' => $status_pintu]);
             } else {
-                // Jika data status_data belum ada, buat data baru
                 StatusData::create([
                     'id_ruangan' => $ruangan->id,
                     'status_pintu' => $status_pintu,
-                    // tambahkan atribut lainnya sesuai kebutuhan
                 ]);
             }
 
@@ -57,27 +51,43 @@ class DashboardController extends Controller
         }
     }
 
+
+
+
     public function status_sensorPir(Request $request)
     {
+        function sendMessageToTelegram($message, $chat_id)
+        {
+            $telegram = new Api(config('services.telegram.bot_token'));
+            $telegram->sendMessage([
+                'chat_id' => $chat_id,
+                'text' => $message,
+            ]);
+        }
+
         $apiKey = $request->input('apiKey');
         $sensor_gerak = $request->input('sensor_gerak');
 
-        // Ambil data ruangan berdasarkan apiKey
         $ruangan = Ruangan::where('apiKey', $apiKey)->first();
+        $nama_ruangan = $ruangan->nama;
+        // return response()->json(['status' => $sensor_gerak]);
+        $sensor_gerak = (int) $sensor_gerak;
+
+        if ($sensor_gerak === 1) {
+            $chat_id = "5585458183";
+            $message =  "Gerakan Terdeteksi pada " . $nama_ruangan;
+            sendMessageToTelegram($message, $chat_id);
+        }
 
         if ($ruangan) {
-            // Ambil data status_data berdasarkan id_ruangan yang sesuai
             $statusData = StatusData::where('id_ruangan', $ruangan->id)->first();
 
             if ($statusData) {
-                // Jika data status_data sudah ada, update status_pintu
                 $statusData->update(['sensor_gerak' => $sensor_gerak]);
             } else {
-                // Jika data status_data belum ada, buat data baru
                 StatusData::create([
                     'id_ruangan' => $ruangan->id,
                     'sensor_gerak' => $sensor_gerak,
-                    // tambahkan atribut lainnya sesuai kebutuhan
                 ]);
             }
 

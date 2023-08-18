@@ -60,7 +60,6 @@
                         </div>
                         <!--end::Body-->
                     </div>
-                    <!--end::List widget 17-->
                 </div>
                 <!--end::Col-->
                 <!--begin::Col-->

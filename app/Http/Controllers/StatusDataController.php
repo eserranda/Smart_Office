@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rfid;
+use App\Models\Status;
 use App\Models\Ruangan;
 use App\Models\StatusData;
 use Illuminate\Http\Request;
@@ -13,6 +15,10 @@ class StatusDataController extends Controller
         $apiKey = $request->input('apiKey');
 
         $id_ruangan = Ruangan::where('apiKey', $apiKey)->first();
+
+        // if ($apiKey == "R000") {
+        //     Status::where('apiKey', 'R000')->update(['status' => 0]);
+        // }
 
         if ($id_ruangan) {
             // Jika data ditemukan, ambil nilai ID ruangan
